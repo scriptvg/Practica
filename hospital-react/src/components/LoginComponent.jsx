@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../context/UserContext';
 import { registerUser } from '../api/api';
 import Swal from 'sweetalert2';
-import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm';
+import LoginForm from './login/LoginForm';
+import RegisterForm from './register-paciente/RegisterForm';
 import './Login.css';
 
 const LoginComponent = () => {
@@ -23,6 +23,11 @@ const LoginComponent = () => {
           showConfirmButton: false,
           timer: 1500
         });
+        if (user.role === 'admin') {
+          history.push('/admin');
+        } else {
+          history.push('/paciente');
+        }
       } else {
         const userData = {
           username: values.username,
